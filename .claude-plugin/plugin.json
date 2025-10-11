@@ -1,0 +1,13 @@
+{
+  "name": "dev-essentials",
+  "version": "0.1.0",
+  "description": "Essential AI-augmented utilities for development - commands, agents, and hooks following Unix coreutils philosophy",
+  "author": {
+    "name": "Piotr Zaniewski",
+    "email": "piotr@cloudrumble.net"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Piotr1215/claude-plugin-dev-essentials",
+  "homepage": "https://github.com/Piotr1215/ai-coreutils-marketplace",
+  "keywords": ["development", "utilities", "coreutils", "documentation", "testing"]
+}

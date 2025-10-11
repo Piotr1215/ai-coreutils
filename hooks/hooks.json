@@ -1,0 +1,13 @@
+{
+  "hooks": [
+    {
+      "name": "notification-manager",
+      "event": "Stop",
+      "command": "./scripts/notify.sh",
+      "description": "Send notification when Claude finishes work",
+      "timeout": 3000,
+      "async": true,
+      "enabled": true
+    }
+  ]
+}
