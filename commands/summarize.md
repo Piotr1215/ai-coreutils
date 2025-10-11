@@ -1,8 +1,6 @@
 ---
 description: Condense file to bullet points respecting language semantics
 argument-hint: FILE
-model: sonnet
-thinking: auto
 ---
 
 # Summarize File Command

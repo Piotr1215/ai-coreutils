@@ -1,8 +1,6 @@
 ---
 description: Compare two files for semantic equivalence
 argument-hint: FILE1 FILE2
-model: sonnet
-thinking: auto
 ---
 
 # Compare Files Command

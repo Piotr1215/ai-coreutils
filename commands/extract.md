@@ -1,8 +1,6 @@
 ---
 description: Extract patterns from code with context and semantic understanding
 argument-hint: PATTERN [PATH] [--format=json|markdown]
-model: sonnet
-thinking: auto
 ---
 
 # Extract Patterns Command
