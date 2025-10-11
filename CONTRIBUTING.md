@@ -1,4 +1,4 @@
-# Contributing to dev-essentials
+# Contributing to ai-coreutils
 
 Thank you for your interest in contributing!
 
@@ -6,8 +6,8 @@ Thank you for your interest in contributing!
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Piotr1215/claude-plugin-dev-essentials.git
-cd claude-plugin-dev-essentials
+git clone https://github.com/Piotr1215/ai-coreutils.git
+cd ai-coreutils
 ```
 
 2. Install locally for testing:
@@ -110,4 +110,4 @@ Open an issue or discussion on GitHub.
 
 ---
 
-Thank you for contributing to dev-essentials!
+Thank you for contributing to ai-coreutils!

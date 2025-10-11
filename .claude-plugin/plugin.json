@@ -1,5 +1,5 @@
 {
-  "name": "dev-essentials",
+  "name": "ai-coreutils",
   "version": "0.1.0",
   "description": "Essential AI-augmented utilities for development - commands, agents, and hooks following Unix coreutils philosophy",
   "author": {
@@ -7,7 +7,7 @@
     "email": "piotr@cloudrumble.net"
   },
   "license": "MIT",
-  "repository": "https://github.com/Piotr1215/claude-plugin-dev-essentials",
-  "homepage": "https://github.com/Piotr1215/ai-coreutils-marketplace",
+  "repository": "https://github.com/Piotr1215/ai-coreutils",
+  "homepage": "https://github.com/Piotr1215/aiverse",
   "keywords": ["development", "utilities", "coreutils", "documentation", "testing"]
 }

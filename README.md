@@ -1,10 +1,37 @@
-# dev-essentials
+# ai-coreutils
+
+> What GNU coreutils are to Unix, ai-coreutils are to AI-assisted development
 
 Essential AI-augmented utilities for development following Unix coreutils philosophy.
 
 ## Philosophy
 
-What GNU coreutils are to Unix, dev-essentials are to AI-assisted development.
+Unix coreutils (`ls`, `grep`, `sed`) operate on text streams through standard interfaces. ai-coreutils leverage Claude's capabilities through slash commands, agents, hooks, and MCP servers.
+
+### The Evolution
+
+```
+Traditional:  User → Unix Tools (ls, grep, sed)
+AI-Enhanced:  User → Claude → Unix Tools + AI Capabilities
+```
+
+Claude sits between user and tools, leveraging both traditional Unix utilities and AI-specific operations. Not replacing, augmenting.
+
+### The Parallel
+
+| Unix System | Description | Claude Code System | Description |
+|-------------|-------------|-----------|-------------|
+| **Coreutils** (`ls`, `grep`) | Small C programs<br>Operate on text | **Slash Commands** (`/extract`, `/summarize`) | Prompts guiding Claude's tool use<br>Predictable text operations |
+| **Shell/Pipes** (`bash`, `\|`) | Composition layer<br>Chain operations | **Hooks** (PostToolUse, SessionStart) | Event-driven automation<br>Orchestrate Claude's actions |
+| **Daemons** (`sshd`, `httpd`) | Single-purpose services<br>Always available | **Agents** (doc-writer, test-generator) | Focused Claude instances<br>Specialized tasks |
+| **System Services** (`systemd`, `cron`) | Complex coordination<br>Inter-process comm | **MCP Servers** (Model Context Protocol) | External tool integration<br>State & communication |
+
+### Common Interface
+
+**Unix:** stdin/stdout (text streams)
+**Claude Code:** tool calls/results + conversation context
+
+### Practical Examples
 
 Claude sits between you and Unix tools, adding semantic understanding:
 
@@ -18,14 +45,30 @@ Claude sits between you and Unix tools, adding semantic understanding:
 
 ```bash
 # Add marketplace
-/plugin marketplace add Piotr1215/ai-coreutils-marketplace
+/plugin marketplace add Piotr1215/aiverse
 
 # Install plugin
-/plugin install dev-essentials@ai-coreutils
+/plugin install ai-coreutils@aiverse
 
 # Verify installation
 /plugin list
 ```
+
+## Components
+
+### Slash Commands
+Prompts that guide Claude to perform specific operations with consistent output format. Claude uses its tool capabilities under the hood. Examples: extract structured data, summarize in bullet format, semantic comparison.
+
+### Agents
+Pre-configured Claude instances with focused behavior and limited scope. Each agent has specific system prompts and tool access. Examples: documentation writer, test generator, security reviewer.
+
+### Hooks
+Bash/Python scripts triggered by Claude Code lifecycle events (SessionStart, PostToolUse, Stop). Orchestrate workflows, call external systems, automate responses to Claude's actions.
+
+### MCP Servers
+Model Context Protocol servers that extend Claude's capabilities. Provide custom tools, maintain state, enable communication between instances, integrate external systems.
+
+---
 
 ## Commands
 
@@ -180,6 +223,6 @@ MIT - See [LICENSE](LICENSE) file for details.
 
 ## Links
 
-- [Marketplace](https://github.com/Piotr1215/ai-coreutils-marketplace)
-- [Issues](https://github.com/Piotr1215/claude-plugin-dev-essentials/issues)
+- [Marketplace](https://github.com/Piotr1215/aiverse)
+- [Issues](https://github.com/Piotr1215/ai-coreutils/issues)
 - [Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins-reference)
