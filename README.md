@@ -205,13 +205,42 @@ Creates comprehensive API documentation with runnable examples.
 
 ---
 
+## Testing
+
+ai-coreutils includes automated tests to ensure quality and prevent regressions.
+
+### Run Tests
+
+```bash
+# Validate plugin structure
+bash scripts/validate_plugin.sh
+
+# Run hook tests
+bats tests/notify_test.bats
+```
+
+### Test Coverage
+
+- **Hook tests** (bats): 8 tests covering notification script execution, logging, and error handling
+- **Structure validation**: JSON validity, required fields, executable permissions
+- **CI/CD**: GitHub Actions runs all tests on push and PR
+
+### Requirements
+
+- bats (for hook tests): `npm install -g bats`
+- jq (for validation): `apt-get install jq` or `brew install jq`
+
+---
+
 ## Contributing
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+3. Add tests for new features (hooks require bats tests)
+4. Ensure `scripts/validate_plugin.sh` passes
+5. Commit changes (`git commit -m 'Add amazing feature'`)
+6. Push to branch (`git push origin feature/amazing-feature`)
+7. Open Pull Request
 
 ---
 
