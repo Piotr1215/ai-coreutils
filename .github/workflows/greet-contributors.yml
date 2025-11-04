@@ -1,0 +1,71 @@
+name: Greet New Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet first-time contributors
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const isFirstTime = async () => {
+              const creator = context.payload.sender.login;
+
+              // Check if this is their first contribution
+              const { data: issues } = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                creator: creator,
+                state: 'all'
+              });
+
+              const { data: prs } = await github.rest.pulls.list({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'all'
+              });
+
+              const userPRs = prs.filter(pr => pr.user.login === creator);
+
+              return issues.length <= 1 && userPRs.length <= 1;
+            };
+
+            if (await isFirstTime()) {
+              const isIssue = !!context.payload.issue;
+              const number = isIssue ? context.payload.issue.number : context.payload.pull_request.number;
+
+              const message = isIssue
+                ? `👋 Thanks for opening your first issue! We're excited to have you as part of the ai-coreutils community.
+
+A maintainer will review your issue soon. In the meantime:
+- Check out our [CONTRIBUTING.md](https://github.com/Piotr1215/ai-coreutils/blob/main/CONTRIBUTING.md) guide
+- Join our [Discussions](https://github.com/Piotr1215/ai-coreutils/discussions) for questions
+- Read the [ROADMAP.md](https://github.com/Piotr1215/ai-coreutils/blob/main/ROADMAP.md) to see what we're working on
+
+If you'd like to work on this issue yourself, let us know!`
+                : `🎉 Thanks for your first pull request! We're thrilled to have your contribution.
+
+A maintainer will review your PR soon. While you wait:
+- Make sure tests pass (\`bash scripts/validate_plugin.sh\`)
+- Ensure your changes follow the [Unix philosophy](https://github.com/Piotr1215/ai-coreutils#design-principles)
+- Update documentation if needed
+
+Need help? Drop a comment or join our [Discussions](https://github.com/Piotr1215/ai-coreutils/discussions)!`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                body: message
+              });
+            }

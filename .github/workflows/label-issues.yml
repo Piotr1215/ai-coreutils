@@ -1,0 +1,141 @@
+name: Label Issues and PRs
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label issues based on content
+        if: github.event_name == 'issues'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = [];
+
+            // Auto-label by issue type
+            if (issue.title.toLowerCase().includes('[bug]')) {
+              labels.push('bug');
+            }
+
+            if (issue.title.toLowerCase().includes('[feature]')) {
+              labels.push('enhancement');
+            }
+
+            if (issue.title.toLowerCase().includes('[question]')) {
+              labels.push('question');
+            }
+
+            // Check for "good first issue" indicators
+            const bodyLower = (issue.body || '').toLowerCase();
+            const goodFirstIssueKeywords = [
+              'good first issue',
+              'beginner friendly',
+              'easy',
+              'starter',
+              'newcomer'
+            ];
+
+            if (goodFirstIssueKeywords.some(keyword => bodyLower.includes(keyword))) {
+              labels.push('good first issue');
+            }
+
+            // Component labels
+            if (bodyLower.includes('slash command') || bodyLower.includes('command')) {
+              labels.push('command');
+            }
+
+            if (bodyLower.includes('agent')) {
+              labels.push('agent');
+            }
+
+            if (bodyLower.includes('hook')) {
+              labels.push('hook');
+            }
+
+            if (bodyLower.includes('mcp') || bodyLower.includes('server')) {
+              labels.push('mcp-server');
+            }
+
+            if (bodyLower.includes('documentation') || bodyLower.includes('docs')) {
+              labels.push('documentation');
+            }
+
+            if (bodyLower.includes('test') || bodyLower.includes('testing')) {
+              labels.push('testing');
+            }
+
+            // Add labels if any were found
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
+
+      - name: Label PRs based on changes
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const labels = [];
+
+            // Get PR files
+            const files = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number
+            });
+
+            const changedFiles = files.data.map(f => f.filename);
+
+            // Label based on changed files
+            if (changedFiles.some(f => f.startsWith('commands/'))) {
+              labels.push('command');
+            }
+
+            if (changedFiles.some(f => f.startsWith('agents/'))) {
+              labels.push('agent');
+            }
+
+            if (changedFiles.some(f => f.startsWith('hooks/') || f.startsWith('scripts/'))) {
+              labels.push('hook');
+            }
+
+            if (changedFiles.some(f => f.startsWith('mcp-servers/'))) {
+              labels.push('mcp-server');
+            }
+
+            if (changedFiles.some(f => f.includes('README') || f.includes('.md'))) {
+              labels.push('documentation');
+            }
+
+            if (changedFiles.some(f => f.startsWith('tests/') || f.includes('test'))) {
+              labels.push('testing');
+            }
+
+            if (changedFiles.some(f => f.startsWith('.github/'))) {
+              labels.push('ci/cd');
+            }
+
+            // Add labels if any were found
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: labels
+              });
+            }

@@ -1,8 +1,35 @@
 # ai-coreutils
 
+<div align="center">
+
+[![Tests](https://github.com/Piotr1215/ai-coreutils/workflows/Tests/badge.svg)](https://github.com/Piotr1215/ai-coreutils/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/Piotr1215/ai-coreutils/releases)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-1.0.0%2B-purple.svg)](https://docs.claude.com/en/docs/claude-code)
+
 > What GNU coreutils are to Unix, ai-coreutils are to AI-assisted development
 
-Essential AI-augmented utilities for development following Unix coreutils philosophy.
+**Essential AI-augmented utilities for development following Unix coreutils philosophy**
+
+[Installation](#installation) • [Quick Start](#quick-start) • [Documentation](#components) • [Examples](examples/) • [Contributing](CONTRIBUTING.md) • [Roadmap](ROADMAP.md)
+
+</div>
+
+---
+
+## Why ai-coreutils?
+
+**Problem:** Traditional Unix tools operate on text, but don't understand semantics.
+
+**Solution:** ai-coreutils adds Claude's semantic understanding to your development workflow.
+
+| You Need To... | Traditional | With ai-coreutils |
+|----------------|-------------|-------------------|
+| Find TODOs | `grep -rn "TODO"` → Manual prioritization | `/extract TODO` → Auto-prioritized with context |
+| Understand code | `cat file.py` → Read & interpret yourself | `/summarize file.py` → Instant explanation |
+| Compare files | `diff old new` → Parse syntax changes | `/compare old new` → Semantic analysis |
+| Write docs | Manual writing & maintenance | `@doc-writer` → Auto-generated from code |
+| Write tests | Manual test creation | `@test-generator` → Comprehensive test suites |
 
 ## Philosophy
 
@@ -41,7 +68,7 @@ Claude sits between you and Unix tools, adding semantic understanding:
 | `head -n 20 file.py` → You interpret what code does | `/summarize file.py` → Claude explains purpose, components, dependencies |
 | `diff old.py new.py` → You analyze if equivalent | `/compare old.py new.py` → Claude identifies semantic equivalence and risks |
 
-## Installation
+## Quick Start
 
 ```bash
 # Add marketplace
@@ -52,7 +79,33 @@ Claude sits between you and Unix tools, adding semantic understanding:
 
 # Verify installation
 /plugin list
+
+# Try it out!
+/extract TODO src/
+/summarize README.md
+@doc-writer document your-file.py
 ```
+
+## Installation
+
+**From marketplace (recommended):**
+```bash
+/plugin marketplace add Piotr1215/aiverse
+/plugin install ai-coreutils@aiverse
+```
+
+**From source:**
+```bash
+git clone https://github.com/Piotr1215/ai-coreutils.git
+cd ai-coreutils
+claude plugin install .
+```
+
+**Prerequisites:**
+- Claude Code 1.0.0+
+- Platform: Linux or macOS
+- Optional: tmux (for smart notifications)
+- Optional: bats (for running tests)
 
 ## Components
 
@@ -225,20 +278,35 @@ Creates comprehensive API documentation with runnable examples.
 
 ---
 
-## Requirements
+## Real-World Examples
 
-- Claude Code 1.0.0+
-- Platform: Linux or macOS
-- Optional: tmux (for smart notifications)
+See [examples/](examples/) for detailed real-world usage patterns:
+
+- **Code Maintenance**: Finding and prioritizing TODOs, comparing refactored code
+- **Documentation**: Auto-generating API docs from code
+- **Security Audits**: Finding security issues with semantic understanding
+- **Refactoring**: Planning and validating refactors
+- **Code Review**: Streamlining PR reviews with semantic analysis
+
+**Quick example:**
+```bash
+# Before: Manual TODO review
+grep -rn "TODO" src/
+# 50 TODOs, all look the same, which to fix first?
+
+# After: Semantic analysis with priority
+/extract TODO src/
+# Claude analyzes each TODO:
+# - High Priority: Security issues, blocking bugs
+# - Medium Priority: Features, tech debt
+# - Low Priority: Style, minor improvements
+```
 
 ---
 
 ## Testing
 
-ai-coreutils includes automated tests to ensure quality and prevent regressions.
-
-### Run Tests
-
+**Run tests locally:**
 ```bash
 # Validate plugin structure
 bash scripts/validate_plugin.sh
@@ -247,39 +315,62 @@ bash scripts/validate_plugin.sh
 bats tests/notify_test.bats
 ```
 
-### Test Coverage
+**Coverage:**
+- Hook tests (bats): 8 tests
+- Structure validation: JSON validity, executable permissions
+- CI/CD: Automated testing on push and PR
 
-- **Hook tests** (bats): 8 tests covering notification script execution, logging, and error handling
-- **Structure validation**: JSON validity, required fields, executable permissions
-- **CI/CD**: GitHub Actions runs all tests on push and PR
-
-### Requirements
-
-- bats (for hook tests): `npm install -g bats`
-- jq (for validation): `apt-get install jq` or `brew install jq`
+**Requirements**: `bats`, `jq` (see [CONTRIBUTING.md](CONTRIBUTING.md) for setup)
 
 ---
 
 ## Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Add tests for new features (hooks require bats tests)
-4. Ensure `scripts/validate_plugin.sh` passes
-5. Commit changes (`git commit -m 'Add amazing feature'`)
-6. Push to branch (`git push origin feature/amazing-feature`)
-7. Open Pull Request
+We welcome contributions! Here's how to get started:
+
+**Quick Start:**
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md) for development setup
+2. Check [ROADMAP.md](ROADMAP.md) for planned features
+3. Look for [good first issues](https://github.com/Piotr1215/ai-coreutils/labels/good%20first%20issue)
+4. Join [Discussions](https://github.com/Piotr1215/ai-coreutils/discussions)
+
+**What we need:**
+- New slash commands (extract, summarize, compare)
+- New agents (code reviewer, security scanner)
+- MCP servers (git, docs, testing)
+- Documentation and examples
+- Tests and CI improvements
+
+See [ROADMAP.md](ROADMAP.md) for detailed feature roadmap and contribution opportunities.
+
+---
+
+## Community
+
+- **Discussions**: [GitHub Discussions](https://github.com/Piotr1215/ai-coreutils/discussions)
+- **Issues**: [Bug Reports & Feature Requests](https://github.com/Piotr1215/ai-coreutils/issues)
+- **Marketplace**: [aiverse](https://github.com/Piotr1215/aiverse)
+- **Code of Conduct**: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- **Security**: [SECURITY.md](SECURITY.md)
 
 ---
 
 ## License
 
-MIT - See [LICENSE](LICENSE) file for details.
+[MIT License](LICENSE) - Copyright (c) 2024 Piotr Zaniewski
 
 ---
 
-## Links
+## Changelog
 
-- [Marketplace](https://github.com/Piotr1215/aiverse)
-- [Issues](https://github.com/Piotr1215/ai-coreutils/issues)
-- [Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins-reference)
+See [CHANGELOG.md](CHANGELOG.md) for version history and release notes.
+
+---
+
+<div align="center">
+
+**Made with Claude Code**
+
+[⭐ Star this repo](https://github.com/Piotr1215/ai-coreutils) • [🐛 Report Bug](https://github.com/Piotr1215/ai-coreutils/issues/new?template=bug_report.yml) • [💡 Request Feature](https://github.com/Piotr1215/ai-coreutils/issues/new?template=feature_request.yml)
+
+</div>

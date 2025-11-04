@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/Piotr1215/ai-coreutils/discussions
+    about: For general discussions, ideas, and community chat
+  - name: Claude Code Documentation
+    url: https://docs.claude.com/en/docs/claude-code
+    about: Official Claude Code documentation
