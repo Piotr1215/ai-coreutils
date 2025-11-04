@@ -57,7 +57,18 @@ Claude sits between you and Unix tools, adding semantic understanding:
 ## Components
 
 ### Slash Commands
-Prompts that guide Claude to perform specific operations with consistent output format. Claude uses its tool capabilities under the hood. Examples: extract structured data, summarize in bullet format, semantic comparison.
+Prompts that guide Claude to perform specific operations with consistent output format. Claude uses its tool capabilities under the hood.
+
+**Composable in natural language:** Slash commands can be combined by referencing them in natural language:
+```bash
+# Command composition examples
+/extract TODO from src/ then filter for HIGH priority items
+/summarize this file and highlight security concerns
+```
+
+No pipe symbols needed - just describe what you want using command names.
+
+Examples: extract structured data, summarize in bullet format, semantic comparison.
 
 ### Agents
 Pre-configured Claude instances with focused behavior and limited scope. Each agent has specific system prompts and tool access. Examples: documentation writer, test generator, security reviewer.
@@ -146,6 +157,23 @@ Test case generation expert focusing on coverage and edge cases.
 ---
 
 ## Hooks
+
+### session-start
+
+Displays core development principles at the start of every Claude session.
+
+**Event:** SessionStart
+**Behavior:** Outputs universal quality principles as session reminder
+**Extensible:** Environment variables can trigger different hook content
+
+**Example - Trigger different content via environment variable:**
+```bash
+PAIR_PROGRAMMING=1 claude  # Triggers pair programming mode content
+```
+
+Variables control which principles are displayed based on your workflow context.
+
+---
 
 ### notification-manager
 
