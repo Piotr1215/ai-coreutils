@@ -21,22 +21,34 @@ Deep web research returning actionable summaries.
 
 ## Output Format
 
+Follow the invoker's prompt for format. Defaults if not specified:
+- Bullet count: 5
+- Format: markdown
+- Depth: standard (2-3 sources)
+
 ```markdown
 ## {Topic}
 
-**Summary** (5 bullets max)
-- Key finding 1
-- Key finding 2
+**Summary**
+- Finding 1
+- Finding 2
 ...
 
 **Sources**
 - [Title](url)
-- [Title](url)
 ```
+
+## Invocation Parameters
+
+The invoking agent may specify in prompt:
+- `bullets: N` - number of summary points (default: 5)
+- `depth: quick|standard|deep` - research thoroughness
+- `format: bullets|prose|table` - output structure
+- `focus: X` - specific aspect to emphasize
 
 ## Constraints
 
-- Max 5 bullet points
 - Always cite sources as markdown links
 - No speculation - facts only
 - Return "insufficient data" if sources conflict or unavailable
+- Respect invoker's format/depth/focus requests
